@@ -1,4 +1,4 @@
-module NS-ToDoList
+module github.com/nashkispace/ns-todolist
 
 go 1.18
 
