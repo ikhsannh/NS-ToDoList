@@ -3,9 +3,9 @@ package main
 import (
 	"os"
 
-	"/ns-todolist/serverSide/routes"
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
+	"github.com/nashkispace/ns-todolist/serverSide/routes"
 )
 
 func main() {
