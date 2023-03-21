@@ -11,7 +11,7 @@ import (
 )
 
 func DBinstance() *mongo.Client {
-	MongoDb := "mongodb://localhost:27017/todolist"
+	MongoDb := "mongodb://nashkispace:b6Ol0nK2DPZRcXPQ@ac-sfoy2es-shard-00-00.clkur4r.mongodb.net:27017,ac-sfoy2es-shard-00-01.clkur4r.mongodb.net:27017,ac-sfoy2es-shard-00-02.clkur4r.mongodb.net:27017/todolist?ssl=true&replicaSet=atlas-slxwf6-shard-0&authSource=admin&retryWrites=true&w=majority"
 
 	client, err := mongo.NewClient(options.Client().ApplyURI(MongoDb))
 	if err != nil {

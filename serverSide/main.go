@@ -20,11 +20,6 @@ func main() {
 
 	router.POST("/api/task", routes.AddTask)
 	router.GET("/api/tasks", routes.GetTasks)
-	// router.GET("/entry/:id/", routes.GetEntryById)
-	// router.GET("/ingredient/:ingredient", routes.GetEntriesByIngredient)
-
-	// router.PUT("/entry/update/:id", routes.UpdateEntry)
-	// router.PUT("/ingredient/update/:id", routes.UpdateIngredient)
 	router.DELETE("/api/deleteTask/:id", routes.DeleteTask)
 	router.Run(":" + port)
 }
