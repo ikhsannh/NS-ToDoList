@@ -5,7 +5,7 @@ import (
 
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
-	"github.com/nashkispace/ns-todolist/serverSide/routes"
+	"github.com/nashkispace/ns-todolist/serverSide/api"
 )
 
 func main() {
@@ -20,6 +20,6 @@ func main() {
 
 	router.POST("/api/task", routes.AddTask)
 	router.GET("/api/tasks", routes.GetTasks)
-	router.DELETE("/api/deleteTask/:id", routes.DeleteTask)
+	// router.DELETE("/api/deleteTask/:id", routes.DeleteTask)
 	router.Run(":" + port)
 }

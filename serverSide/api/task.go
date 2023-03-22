@@ -1,4 +1,4 @@
-package routes
+package api
 
 import (
 	"context"
@@ -41,45 +41,4 @@ func AddTask(c *gin.Context) {
 	}
 	defer cancel()
 	c.JSON(http.StatusOK, result)
-}
-
-func GetTasks(c *gin.Context) {
-	var ctx, cancel = context.WithTimeout(context.Background(), 100*time.Second)
-
-	var tasks []bson.M
-	cursor, err := taskCollection.Find(ctx, bson.M{})
-
-	if err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
-		fmt.Println(err)
-		return
-	}
-
-	if err = cursor.All(ctx, &tasks); err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
-		fmt.Println(err)
-		return
-	}
-	defer cancel()
-	fmt.Println(tasks)
-	c.JSON(http.StatusOK, tasks)
-
-}
-
-func DeleteTask(c *gin.Context) {
-	taskID := c.Params.ByName("id")
-	docID, _ := primitive.ObjectIDFromHex(taskID)
-
-	var ctx, cancel = context.WithTimeout(context.Background(), 100*time.Second)
-
-	result, err := taskCollection.DeleteOne(ctx, bson.M{"_id": docID})
-
-	if err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
-		fmt.Println(err)
-		return
-	}
-
-	defer cancel()
-	c.JSON(http.StatusOK, result.DeletedCount)
 }
