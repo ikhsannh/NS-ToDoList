@@ -1,6 +1,7 @@
 package main
 
 import (
+	"net/http"
 	"os"
 
 	"github.com/gin-contrib/cors"
@@ -9,6 +10,25 @@ import (
 )
 
 func main() {
+
+	http.HandleFunc("/api/task", func(w http.ResponseWriter, r *http.Request) {
+		// CORS
+		w.Header().Add("Access-Control-Allow-Origin", "http://localhost:3000")
+		w.Header().Add("Access-Control-Allow-Headers", "Content-Type")
+		w.Header().Add("Access-Control-Allow-Methods", "POST")
+		w.Header().Add("Access-Control-Allow-Credentials", "true")
+
+	})
+
+	http.HandleFunc("/api/tasks", func(w http.ResponseWriter, r *http.Request) {
+		// CORS
+		w.Header().Add("Access-Control-Allow-Origin", "http://localhost:3000")
+		w.Header().Add("Access-Control-Allow-Headers", "Content-Type")
+		w.Header().Add("Access-Control-Allow-Methods", "GET")
+		w.Header().Add("Access-Control-Allow-Credentials", "true")
+
+	})
+
 	port := os.Getenv("PORT")
 	if port == "" {
 		port = "4000"
@@ -18,8 +38,8 @@ func main() {
 	router.Use(gin.Logger())
 	router.Use(cors.Default())
 
-	router.POST("/api/task", routes.AddTask)
-	router.GET("/api/tasks", routes.GetTasks)
-	// router.DELETE("/api/deleteTask/:id", routes.DeleteTask)
+	router.POST("/api/task", api.AddTask)
+	router.GET("/api/tasks", api.GetTasks)
+	// router.DELETE("/api/deleteTask/:id", api.DeleteTask)
 	router.Run(":" + port)
 }
